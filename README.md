@@ -2,29 +2,7 @@
 
 ![Header](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/pfofv47dooojerkmfgr4.png)
 
-This is the codebase to go along with tbe blog post [Building a Full Stack NFT Marketplace on Ethereum with Polygon](https://dev.to/dabit3/building-scalable-full-stack-apps-on-ethereum-with-polygon-2cfb)
-
 ### Running this project
-
-#### Gitpod
-
-To deploy this project to Gitpod, follow these steps:
-
-1. Click this link to deploy
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/dabit3/polygon-ethereum-nextjs-marketplace)
-
-2. Import the RPC address given to you by GitPod into your MetaMask wallet
-
-This endpoint will look something like this:
-
-```
-https://8545-copper-swordtail-j1mvhxv3.ws-eu18.gitpod.io/
-```
-
-The chain ID should be 1337. If you have a localhost rpc set up, you may need to overwrite it.
-
-![MetaMask RPC Import](wallet.png)
 
 #### Local setup
 
@@ -65,45 +43,33 @@ npm run dev
 
 ### Configuration
 
-To deploy to Polygon test or main networks, update the configurations located in __hardhat.config.js__ to use a private key and, optionally, deploy to a private RPC like Infura.
+To deploy to Polygon test or main networks, update the configurations located in __hardhat.config.js__ to use a private key and, optionally, deploy to a private RPC like Alchemy.
 
 ```javascript
 require("@nomiclabs/hardhat-waffle");
-const fs = require('fs');
-const privateKey = fs.readFileSync(".secret").toString().trim() || "01234567890123456789";
 
-// infuraId is optional if you are using Infura RPC
-const infuraId = fs.readFileSync(".infuraid").toString().trim() || "";
+/**
+ * @type import('hardhat/config').HardhatUserConfig
+ */
 
+// require("dotenv").config();
+require("@nomiclabs/hardhat-ethers");
+
+// const { API_URL, PRIVATE_KEY } = process.env;
+const API_URL =
+  "https://polygon-mumbai.g.alchemy.com/v2/8SaUxkAflwvV4i4GqzW5n-6tO7pxfGZP";
+const PRIVATE_KEY =
+  "2da7a4ec24e5c78199fb58397bb288558fae8167396db1e6381b80bb5b7a449a";
 module.exports = {
-  defaultNetwork: "hardhat",
+  solidity: "0.8.4",
+  defaultNetwork: "polygon_mumbai",
   networks: {
-    hardhat: {
-      chainId: 1337
+    hardhat: {},
+    polygon_mumbai: {
+      url: API_URL,
+      accounts: [`0x${PRIVATE_KEY}`],
     },
-    mumbai: {
-      // Infura
-      // url: `https://polygon-mumbai.infura.io/v3/${infuraId}`
-      url: "https://rpc-mumbai.matic.today",
-      accounts: [privateKey]
-    },
-    matic: {
-      // Infura
-      // url: `https://polygon-mainnet.infura.io/v3/${infuraId}`,
-      url: "https://rpc-mainnet.maticvigil.com",
-      accounts: [privateKey]
-    }
   },
-  solidity: {
-    version: "0.8.4",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 200
-      }
-    }
-  }
 };
-```
 
-If using Infura, update __.infuraid__ with your [Infura](https://infura.io/) project ID.
+Tpo deploy on polygon through alchemy use this.
