@@ -44,6 +44,7 @@ npx hardhat run scripts/deploy.js --network localhost
 ```
 npm run dev
 ```
+5. You should have metamask extension for working of this project.
 
 ### Configuration
 
