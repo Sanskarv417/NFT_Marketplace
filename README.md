@@ -1,6 +1,8 @@
-## Full stack NFT marketplace built with Polygon, Solidity, IPFS, & Next.js
+## Full stack NFT Metaverse Marketplace for Hackisitica'22 
+Technologies used- Polygon, Solidity, IPFS, & Next.js
 
 Video for the project:
+https://youtu.be/vgSuUlOK5YM
 
 ![Header](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/pfofv47dooojerkmfgr4.png)
 
